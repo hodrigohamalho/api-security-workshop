@@ -1,0 +1,16 @@
+apiVersion: capabilities.3scale.net/v1alpha1
+kind: Tenant
+metadata:
+  name: ecorp-tenant
+spec:
+  username: admin
+  systemMasterUrl: https://master.apps.cluster-8cb5.8cb5.example.opentlc.com
+  email: admin@ecorp.com
+  organizationName: ECorp
+  masterCredentialsRef:
+    name: system-seed
+  passwordCredentialsRef:
+    name: ecorp-admin-secret
+  tenantSecretRef:
+    name: ecorp-tenant-secret
+    namespace: 3scale

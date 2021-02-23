@@ -14,6 +14,8 @@ https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.9/
 
 ![Multi Tenancy - Master Tenant Audience](images/multi-tenancy/02-access-audience.png)
 
+### Create a tenant using the Console Web
+
 * Click in the button **Create** in order to create a new account
 
 ![Multi Tenancy - Master Tenant Accounts](images/multi-tenancy/03-accounts.png)
@@ -41,3 +43,17 @@ https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.9/
 * Access the developer portal option from the side menu, it's a fresh developer portal.
 
 ![Multi Tenancy - Developer Portal](images/multi-tenancy/09-developer-portal.png)
+
+### Create a tenant using the Tenant CRD
+
+https://github.com/3scale/3scale-operator/blob/master/doc/tenant-reference.md
+https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.8/html/operating_3scale/provision-threescale-services-via-operator#deploying-optional-tenants-custom-resource
+
+* You can create a tenant using the CRD
+
+```
+oc create -f support/ecorp-admin-secret.yaml
+oc create -f support/tenant-crd.yaml
+```
+
+![Multi Tenancy - Tenant using the Operator](images/multi-tenancy/10-tenant-using-operator.png)
