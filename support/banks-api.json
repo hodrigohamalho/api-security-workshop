@@ -1,0 +1,1201 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "open-data",
+        "version": "1.0.0",
+        "description": "The Open Data API specifications allow API providers (e.g. banks, building societies and ATM providers) to develop API endpoints which can then be accessed by API users (e.g. third party developers) to build mobile and web applications for banking customers."
+    },
+    "paths": {
+        "/public/banks": {
+            "summary": "Get a list of all banks",
+            "description": "Returns a list of banks supported:\n\n* ID used as parameter in URLs\n* Short and full name of bank\n* Logo URL\n* Website\n",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/banks"
+                                }
+                            }
+                        },
+                        "description": "Return the list of banks."
+                    }
+                },
+                "summary": "Returns a list of banks supported"
+            }
+        },
+        "/public/banks/{bank_id}": {
+            "summary": "Path used to manage a single banks.",
+            "description": "Returns information about a single bank specified by BANK_ID including:\n\n* Short and full name of bank\n* Logo URL\n* Website",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/banks"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `banks`."
+                    }
+                },
+                "summary": "Get a banks",
+                "description": "Gets the details of a single instance of a `banks`."
+            },
+            "parameters": [
+                {
+                    "name": "bank_id",
+                    "description": "A unique identifier for a `banks`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/public/banks/{bank_id}/atms": {
+            "summary": "Returns information about ATMs for a single bank specified by BANK_ID",
+            "description": "Returns information about ATMs for a single bank specified by BANK_ID including:\n* Address\n* Geo Location\n* License the data under this endpoint is released under\n\nPagination:\n* By default, 100 records are returned.\n\nYou can use the url query parameters limit and offset for pagination\n\n",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/atms"
+                                },
+                                "examples": {
+                                    "atms": {
+                                        "value": {
+                                            "id": "atm-id-123",
+                                            "bank_id": "bank-id-123",
+                                            "name": "Atm by the Lake",
+                                            "address": {
+                                                "line_1": "No 1 the Road",
+                                                "line_2": "The Place",
+                                                "line_3": "The Hill",
+                                                "city": "Berlin",
+                                                "county": "",
+                                                "state": "Brandenburg",
+                                                "postcode": "13359",
+                                                "country_code": "DE"
+                                            },
+                                            "location": {
+                                                "latitude": 11.45,
+                                                "longitude": 11.45
+                                            },
+                                            "meta": {
+                                                "license": {
+                                                    "id": "5",
+                                                    "name": "TESOBE"
+                                                }
+                                            },
+                                            "monday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "tuesday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "wednesday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "thursday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "friday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "saturday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "sunday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "is_accessible": "true",
+                                            "located_at": "Full service store",
+                                            "more_info": "short walk to the lake from here",
+                                            "has_deposit_capability": "true"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Return the list of ATMs"
+                    }
+                },
+                "summary": "Returns information about ATMs for a single bank",
+                "description": "Returns information about ATMs for a single bank specified by BANK_ID"
+            },
+            "parameters": [
+                {
+                    "name": "bank_id",
+                    "description": "Bank Unique Identifier",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/public/banks/{bank_id}/atms/{atm_id}": {
+            "summary": "Returns information about ATM for a single bank",
+            "description": "Returns information about ATM for a single bank specified by BANK_ID and ATM_ID including:\n* Address\n* Geo Location\n* License the data under this endpoint is released under",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "atm": {
+                                        "value": {
+                                            "id": "atm-id-123",
+                                            "bank_id": "bank-id-123",
+                                            "name": "Atm by the Lake",
+                                            "address": {
+                                                "line_1": "No 1 the Road",
+                                                "line_2": "The Place",
+                                                "line_3": "The Hill",
+                                                "city": "Berlin",
+                                                "county": "",
+                                                "state": "Brandenburg",
+                                                "postcode": "13359",
+                                                "country_code": "DE"
+                                            },
+                                            "location": {
+                                                "latitude": 11.45,
+                                                "longitude": 11.45
+                                            },
+                                            "meta": {
+                                                "license": {
+                                                    "id": "5",
+                                                    "name": "TESOBE"
+                                                }
+                                            },
+                                            "monday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "tuesday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "wednesday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "thursday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "friday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "saturday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "sunday": {
+                                                "opening_time": "10:00",
+                                                "closing_time": "18:00"
+                                            },
+                                            "is_accessible": "true",
+                                            "located_at": "Full service store",
+                                            "more_info": "short walk to the lake from here",
+                                            "has_deposit_capability": "true"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Return a specific ATM"
+                    }
+                },
+                "summary": "Returns information about ATM for a single bank",
+                "description": "Returns information about ATM for a single bank specified by BANK_ID and ATM_ID"
+            },
+            "parameters": [
+                {
+                    "name": "bank_id",
+                    "description": "Bank Unique Identifier",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                },
+                {
+                    "name": "atm_id",
+                    "description": "ATM Unique Identifier",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/public/banks/{bank_id}/products": {
+            "summary": "Returns information about the financial products offered by a bank",
+            "description": "Returns information about the financial products offered by a bank specified by BANK_ID including:\n* Name\n* Code\n* Parent Product Code\n* Category\n* Family\n* Super Family\n* More info URL\n* Description\n* Terms and Conditions\n* License the data under this endpoint is released under",
+            "get": {
+                "parameters": [
+                    {
+                        "name": "bank_id",
+                        "description": "Bank Unique Identifier",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/products"
+                                },
+                                "examples": {
+                                    "products": {
+                                        "value": {
+                                            "products": [
+                                                {
+                                                    "bank_id": "gh.29.uk",
+                                                    "code": "product_code",
+                                                    "parent_product_code": "parent",
+                                                    "name": "product name",
+                                                    "category": "category",
+                                                    "family": "family",
+                                                    "super_family": "super family",
+                                                    "more_info_url": "www.example.com/prod1/more-info.html",
+                                                    "details": "Details",
+                                                    "description": "Description",
+                                                    "meta": {
+                                                        "license": {
+                                                            "id": "5",
+                                                            "name": "TESOBE"
+                                                        }
+                                                    },
+                                                    "product_attributes": [
+                                                        {
+                                                            "product_code": "saving1",
+                                                            "product_attribute_id": "613c83ea-80f9-4560-8404-b9cd4ec42a7f",
+                                                            "name": "OVERDRAFT_START_DATE",
+                                                            "type": "DATE_WITH_DAY",
+                                                            "value": "2012-04-23"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Return a list of products."
+                    }
+                },
+                "summary": "Returns information about the financial products offered by a bank",
+                "description": "Returns information about the financial products offered by a bank specified by BANK_ID"
+            },
+            "parameters": [
+                {
+                    "name": "bank_id",
+                    "description": "Bank Unique Identifier",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/public/banks/{bank_id}/branches": {
+            "summary": "Returns information about branches for a single bank specified by BANK_ID",
+            "description": "Returns information about branches for a single bank specified by BANK_ID including:\n* Name\n* Address\n* Geo Location\n* License the data under this endpoint is released under\n* Structured opening hours\n* Accessible flag\n* Branch Type\n* More Info\n* Pagination:\n\nBy default, 50 records are returned.\n\nYou can use the url query parameters limit and offset for pagination\n\nYou can also use the follow url query parameters:\n* city - string, find Branches those in this city, optional\n* withinMetersOf - number, find Branches within given meters distance, optional\n* nearLatitude - number, a position of latitude value, cooperate with withMetersOf do query filter, optional\n* nearLongitude - number, a position of longitude value, cooperate with withMetersOf do query filter, optional\n\nnote: withinMetersOf, nearLatitude and nearLongitude either all empty or all have value.",
+            "get": {
+                "parameters": [
+                    {
+                        "name": "bank_id",
+                        "description": "Bank Unique Identifier",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/branches"
+                                },
+                                "examples": {
+                                    "branches": {
+                                        "value": {
+                                            "branches": [
+                                                {
+                                                    "id": "branch-id-123",
+                                                    "bank_id": "bank-id-123",
+                                                    "name": "Branch by the Lake",
+                                                    "address": {
+                                                        "line_1": "No 1 the Road",
+                                                        "line_2": "The Place",
+                                                        "line_3": "The Hill",
+                                                        "city": "Berlin",
+                                                        "county": "String",
+                                                        "state": "Brandenburg",
+                                                        "postcode": "13359",
+                                                        "country_code": "DE"
+                                                    },
+                                                    "location": {
+                                                        "latitude": 10,
+                                                        "longitude": 10
+                                                    },
+                                                    "meta": {
+                                                        "license": {
+                                                            "id": "PDDL",
+                                                            "name": "Open Data Commons Public Domain Dedication and License "
+                                                        }
+                                                    },
+                                                    "lobby": {
+                                                        "monday": [
+                                                            {
+                                                                "opening_time": "10:00",
+                                                                "closing_time": "18:00"
+                                                            }
+                                                        ],
+                                                        "tuesday": [
+                                                            {
+                                                                "opening_time": "10:00",
+                                                                "closing_time": "18:00"
+                                                            }
+                                                        ],
+                                                        "wednesday": [
+                                                            {
+                                                                "opening_time": "10:00",
+                                                                "closing_time": "18:00"
+                                                            }
+                                                        ],
+                                                        "thursday": [
+                                                            {
+                                                                "opening_time": "10:00",
+                                                                "closing_time": "18:00"
+                                                            }
+                                                        ],
+                                                        "friday": [
+                                                            {
+                                                                "opening_time": "10:00",
+                                                                "closing_time": "18:00"
+                                                            }
+                                                        ],
+                                                        "saturday": [
+                                                            {
+                                                                "opening_time": "10:00",
+                                                                "closing_time": "18:00"
+                                                            }
+                                                        ],
+                                                        "sunday": [
+                                                            {
+                                                                "opening_time": "10:00",
+                                                                "closing_time": "18:00"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "drive_up": {
+                                                        "monday": {
+                                                            "opening_time": "10:00",
+                                                            "closing_time": "18:00"
+                                                        },
+                                                        "tuesday": {
+                                                            "opening_time": "10:00",
+                                                            "closing_time": "18:00"
+                                                        },
+                                                        "wednesday": {
+                                                            "opening_time": "10:00",
+                                                            "closing_time": "18:00"
+                                                        },
+                                                        "thursday": {
+                                                            "opening_time": "10:00",
+                                                            "closing_time": "18:00"
+                                                        },
+                                                        "friday": {
+                                                            "opening_time": "10:00",
+                                                            "closing_time": "18:00"
+                                                        },
+                                                        "saturday": {
+                                                            "opening_time": "10:00",
+                                                            "closing_time": "18:00"
+                                                        },
+                                                        "sunday": {
+                                                            "opening_time": "10:00",
+                                                            "closing_time": "18:00"
+                                                        }
+                                                    },
+                                                    "branch_routing": {
+                                                        "scheme": "OBP",
+                                                        "address": "123abc"
+                                                    },
+                                                    "is_accessible": "true",
+                                                    "accessibleFeatures": "wheelchair, atm usuable by the visually impaired",
+                                                    "branch_type": "Full service store",
+                                                    "more_info": "short walk to the lake from here",
+                                                    "phone_number": "+381631954907"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Return a list of branches"
+                    }
+                },
+                "summary": "Returns information about branches for a single bank specified by BANK_ID",
+                "description": "Returns information about branches for a single bank specified by BANK_ID:\n\n* Name\n* Address\n* Geo Location\n* License the data under this endpoint is released under\n* Structured opening hours\n* Accessible flag\n* Branch Type\n* More Info\n\nPagination:\n\nBy default, 50 records are returned.\n\nYou can use the url query parameters limit and offset for pagination\nYou can also use the follow url query parameters:\n\n* city - string, find Branches those in this city, optional\n* withinMetersOf - number, find Branches within given meters distance, optional\n* nearLatitude - number, a position of latitude value, cooperate with withMetersOf do query filter, optional\n* nearLongitude - number, a position of longitude value, cooperate with withMetersOf do query filter, optional\n* note: withinMetersOf, nearLatitude and nearLongitude either all empty or all have value."
+            },
+            "parameters": [
+                {
+                    "name": "bank_id",
+                    "description": "Bank Unique Identifier",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/public/banks/{bank_id}/branches/{branch_id}": {
+            "summary": "Returns information about a single Branch specified by BANK_ID and BRANCH_ID",
+            "description": "Returns information about a single Branch specified by BANK_ID and BRANCH_ID including:\n* Name\n* Address\n* IGeo Location\n\nLicense the data under this endpoint is released under.",
+            "get": {
+                "parameters": [
+                    {
+                        "name": "bank_id",
+                        "description": "Bank Unique Identifier",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "branch_id",
+                        "description": "Branch Unique Identifier",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/branches"
+                                },
+                                "examples": {
+                                    "branch": {
+                                        "value": {
+                                            "id": "branch-id-123",
+                                            "bank_id": "bank-id-123",
+                                            "name": "Branch by the Lake",
+                                            "address": {
+                                                "line_1": "No 1 the Road",
+                                                "line_2": "The Place",
+                                                "line_3": "The Hill",
+                                                "city": "Berlin",
+                                                "county": "String",
+                                                "state": "Brandenburg",
+                                                "postcode": "13359",
+                                                "country_code": "DE"
+                                            },
+                                            "location": {
+                                                "latitude": 10,
+                                                "longitude": 10
+                                            },
+                                            "meta": {
+                                                "license": {
+                                                    "id": "PDDL",
+                                                    "name": "Open Data Commons Public Domain Dedication and License "
+                                                }
+                                            },
+                                            "lobby": {
+                                                "monday": [
+                                                    {
+                                                        "opening_time": "10:00",
+                                                        "closing_time": "18:00"
+                                                    }
+                                                ],
+                                                "tuesday": [
+                                                    {
+                                                        "opening_time": "10:00",
+                                                        "closing_time": "18:00"
+                                                    }
+                                                ],
+                                                "wednesday": [
+                                                    {
+                                                        "opening_time": "10:00",
+                                                        "closing_time": "18:00"
+                                                    }
+                                                ],
+                                                "thursday": [
+                                                    {
+                                                        "opening_time": "10:00",
+                                                        "closing_time": "18:00"
+                                                    }
+                                                ],
+                                                "friday": [
+                                                    {
+                                                        "opening_time": "10:00",
+                                                        "closing_time": "18:00"
+                                                    }
+                                                ],
+                                                "saturday": [
+                                                    {
+                                                        "opening_time": "10:00",
+                                                        "closing_time": "18:00"
+                                                    }
+                                                ],
+                                                "sunday": [
+                                                    {
+                                                        "opening_time": "10:00",
+                                                        "closing_time": "18:00"
+                                                    }
+                                                ]
+                                            },
+                                            "drive_up": {
+                                                "monday": {
+                                                    "opening_time": "10:00",
+                                                    "closing_time": "18:00"
+                                                },
+                                                "tuesday": {
+                                                    "opening_time": "10:00",
+                                                    "closing_time": "18:00"
+                                                },
+                                                "wednesday": {
+                                                    "opening_time": "10:00",
+                                                    "closing_time": "18:00"
+                                                },
+                                                "thursday": {
+                                                    "opening_time": "10:00",
+                                                    "closing_time": "18:00"
+                                                },
+                                                "friday": {
+                                                    "opening_time": "10:00",
+                                                    "closing_time": "18:00"
+                                                },
+                                                "saturday": {
+                                                    "opening_time": "10:00",
+                                                    "closing_time": "18:00"
+                                                },
+                                                "sunday": {
+                                                    "opening_time": "10:00",
+                                                    "closing_time": "18:00"
+                                                }
+                                            },
+                                            "branch_routing": {
+                                                "scheme": "OBP",
+                                                "address": "123abc"
+                                            },
+                                            "is_accessible": "true",
+                                            "accessibleFeatures": "wheelchair, atm usuable by the visually impaired",
+                                            "branch_type": "Full service store",
+                                            "more_info": "short walk to the lake from here",
+                                            "phone_number": "+381631954907"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Return a specific branch."
+                    }
+                },
+                "summary": "Returns information about a single Branch specified by BANK_ID and BRANCH_ID including:",
+                "description": "Returns information about a single Branch specified by BANK_ID and BRANCH_ID including:\n\n* Name\n* Address\n* Geo Location\n* License the data under this endpoint is released under."
+            },
+            "parameters": [
+                {
+                    "name": "bank_id",
+                    "description": "Bank Unique Identifier",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                },
+                {
+                    "name": "branch_id",
+                    "description": "Branch Unique Identifier",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/private/pay": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/payment"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "Payment done"
+                    }
+                },
+                "operationId": "payment",
+                "summary": "Make a Payment"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "banks": {
+                "title": "Root Type for banks",
+                "description": "The root of the banks type's schema.",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "brands": {
+                        "type": "array",
+                        "items": {
+
+                        }
+                    },
+                    "baseUrl": {
+                        "type": "string"
+                    },
+                    "supportedAPIs": {
+                        "type": "object",
+                        "properties": {
+                            "business-current-accounts": {
+                                "type": "array",
+                                "items": {
+
+                                }
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "id": "psd201-bank-x--uk",
+                    "short_name": "Bank X",
+                    "full_name": "The Bank of X",
+                    "logo": "https://static.openbankproject.com/images/sandbox/bank_x.png",
+                    "website": "https://www.example.com",
+                    "bank_routing": {
+                        "scheme": "OBP",
+                        "address": "psd201-bank-x--uk"
+                    }
+                }
+            },
+            "atms": {
+                "title": "Root Type for atms",
+                "description": "The root of the atms type's schema.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "bank_id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "line_1": {
+                                "type": "string"
+                            },
+                            "line_2": {
+                                "type": "string"
+                            },
+                            "line_3": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "county": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            },
+                            "postcode": {
+                                "type": "string"
+                            },
+                            "country_code": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "location": {
+                        "type": "object",
+                        "properties": {
+                            "latitude": {
+                                "format": "double",
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "format": "double",
+                                "type": "number"
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "license": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "monday": {
+                        "type": "object",
+                        "properties": {
+                            "opening_time": {
+                                "type": "string"
+                            },
+                            "closing_time": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "tuesday": {
+                        "type": "object",
+                        "properties": {
+                            "opening_time": {
+                                "type": "string"
+                            },
+                            "closing_time": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "wednesday": {
+                        "type": "object",
+                        "properties": {
+                            "opening_time": {
+                                "type": "string"
+                            },
+                            "closing_time": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "thursday": {
+                        "type": "object",
+                        "properties": {
+                            "opening_time": {
+                                "type": "string"
+                            },
+                            "closing_time": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "friday": {
+                        "type": "object",
+                        "properties": {
+                            "opening_time": {
+                                "type": "string"
+                            },
+                            "closing_time": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "saturday": {
+                        "type": "object",
+                        "properties": {
+                            "opening_time": {
+                                "type": "string"
+                            },
+                            "closing_time": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "sunday": {
+                        "type": "object",
+                        "properties": {
+                            "opening_time": {
+                                "type": "string"
+                            },
+                            "closing_time": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "is_accessible": {
+                        "type": "string"
+                    },
+                    "located_at": {
+                        "type": "string"
+                    },
+                    "more_info": {
+                        "type": "string"
+                    },
+                    "has_deposit_capability": {
+                        "type": "string"
+                    }
+                },
+                "example": "{\n    \"id\": \"atm-id-123\",\n    \"bank_id\": \"bank-id-123\",\n    \"name\": \"Atm by the Lake\",\n    \"address\": {\n        \"line_1\": \"No 1 the Road\",\n        \"line_2\": \"The Place\",\n        \"line_3\": \"The Hill\",\n        \"city\": \"Berlin\",\n        \"county\": \"\",\n        \"state\": \"Brandenburg\",\n        \"postcode\": \"13359\",\n        \"country_code\": \"DE\"\n    },\n    \"location\": {\n        \"latitude\": 11.45,\n        \"longitude\": 11.45\n    },\n    \"meta\": {\n        \"license\": {\n            \"id\": \"5\",\n            \"name\": \"TESOBE\"\n        }\n    },\n    \"monday\": {\n        \"opening_time\": \"10:00\",\n        \"closing_time\": \"18:00\"\n    },\n    \"tuesday\": {\n        \"opening_time\": \"10:00\",\n        \"closing_time\": \"18:00\"\n    },\n    \"wednesday\": {\n        \"opening_time\": \"10:00\",\n        \"closing_time\": \"18:00\"\n    },\n    \"thursday\": {\n        \"opening_time\": \"10:00\",\n        \"closing_time\": \"18:00\"\n    },\n    \"friday\": {\n        \"opening_time\": \"10:00\",\n        \"closing_time\": \"18:00\"\n    },\n    \"saturday\": {\n        \"opening_time\": \"10:00\",\n        \"closing_time\": \"18:00\"\n    },\n    \"sunday\": {\n        \"opening_time\": \"10:00\",\n        \"closing_time\": \"18:00\"\n    },\n    \"is_accessible\": \"true\",\n    \"located_at\": \"Full service store\",\n    \"more_info\": \"short walk to the lake from here\",\n    \"has_deposit_capability\": \"true\"\n}"
+            },
+            "branches": {
+                "title": "Root Type for branches",
+                "description": "The root of the branches type's schema.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "bank_id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "line_1": {
+                                "type": "string"
+                            },
+                            "line_2": {
+                                "type": "string"
+                            },
+                            "line_3": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "county": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            },
+                            "postcode": {
+                                "type": "string"
+                            },
+                            "country_code": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "location": {
+                        "type": "object",
+                        "properties": {
+                            "latitude": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "longitude": {
+                                "format": "int32",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "license": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "lobby": {
+                        "type": "object",
+                        "properties": {
+                            "monday": {
+                                "type": "array",
+                                "items": {
+
+                                }
+                            },
+                            "tuesday": {
+                                "type": "array",
+                                "items": {
+
+                                }
+                            },
+                            "wednesday": {
+                                "type": "array",
+                                "items": {
+
+                                }
+                            },
+                            "thursday": {
+                                "type": "array",
+                                "items": {
+
+                                }
+                            },
+                            "friday": {
+                                "type": "array",
+                                "items": {
+
+                                }
+                            },
+                            "saturday": {
+                                "type": "array",
+                                "items": {
+
+                                }
+                            },
+                            "sunday": {
+                                "type": "array",
+                                "items": {
+
+                                }
+                            }
+                        }
+                    },
+                    "drive_up": {
+                        "type": "object",
+                        "properties": {
+                            "monday": {
+                                "type": "object",
+                                "properties": {
+                                    "opening_time": {
+                                        "type": "string"
+                                    },
+                                    "closing_time": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "tuesday": {
+                                "type": "object",
+                                "properties": {
+                                    "opening_time": {
+                                        "type": "string"
+                                    },
+                                    "closing_time": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "wednesday": {
+                                "type": "object",
+                                "properties": {
+                                    "opening_time": {
+                                        "type": "string"
+                                    },
+                                    "closing_time": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "thursday": {
+                                "type": "object",
+                                "properties": {
+                                    "opening_time": {
+                                        "type": "string"
+                                    },
+                                    "closing_time": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "friday": {
+                                "type": "object",
+                                "properties": {
+                                    "opening_time": {
+                                        "type": "string"
+                                    },
+                                    "closing_time": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "saturday": {
+                                "type": "object",
+                                "properties": {
+                                    "opening_time": {
+                                        "type": "string"
+                                    },
+                                    "closing_time": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "sunday": {
+                                "type": "object",
+                                "properties": {
+                                    "opening_time": {
+                                        "type": "string"
+                                    },
+                                    "closing_time": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "branch_routing": {
+                        "type": "object",
+                        "properties": {
+                            "scheme": {
+                                "type": "string"
+                            },
+                            "address": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "is_accessible": {
+                        "type": "string"
+                    },
+                    "accessibleFeatures": {
+                        "type": "string"
+                    },
+                    "branch_type": {
+                        "type": "string"
+                    },
+                    "more_info": {
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "type": "string"
+                    }
+                },
+                "example": "{\n    \"id\": \"branch-id-123\",\n    \"bank_id\": \"bank-id-123\",\n    \"name\": \"Branch by the Lake\",\n    \"address\": {\n        \"line_1\": \"No 1 the Road\",\n        \"line_2\": \"The Place\",\n        \"line_3\": \"The Hill\",\n        \"city\": \"Berlin\",\n        \"county\": \"String\",\n        \"state\": \"Brandenburg\",\n        \"postcode\": \"13359\",\n        \"country_code\": \"DE\"\n    },\n    \"location\": {\n        \"latitude\": 10,\n        \"longitude\": 10\n    },\n    \"meta\": {\n        \"license\": {\n            \"id\": \"PDDL\",\n            \"name\": \"Open Data Commons Public Domain Dedication and License \"\n        }\n    },\n    \"lobby\": {\n        \"monday\": [\n            {\n                \"opening_time\": \"10:00\",\n                \"closing_time\": \"18:00\"\n            }\n        ],\n        \"tuesday\": [\n            {\n                \"opening_time\": \"10:00\",\n                \"closing_time\": \"18:00\"\n            }\n        ],\n        \"wednesday\": [\n            {\n                \"opening_time\": \"10:00\",\n                \"closing_time\": \"18:00\"\n            }\n        ],\n        \"thursday\": [\n            {\n                \"opening_time\": \"10:00\",\n                \"closing_time\": \"18:00\"\n            }\n        ],\n        \"friday\": [\n            {\n                \"opening_time\": \"10:00\",\n                \"closing_time\": \"18:00\"\n            }\n        ],\n        \"saturday\": [\n            {\n                \"opening_time\": \"10:00\",\n                \"closing_time\": \"18:00\"\n            }\n        ],\n        \"sunday\": [\n            {\n                \"opening_time\": \"10:00\",\n                \"closing_time\": \"18:00\"\n            }\n        ]\n    },\n    \"drive_up\": {\n        \"monday\": {\n            \"opening_time\": \"10:00\",\n            \"closing_time\": \"18:00\"\n        },\n        \"tuesday\": {\n            \"opening_time\": \"10:00\",\n            \"closing_time\": \"18:00\"\n        },\n        \"wednesday\": {\n            \"opening_time\": \"10:00\",\n            \"closing_time\": \"18:00\"\n        },\n        \"thursday\": {\n            \"opening_time\": \"10:00\",\n            \"closing_time\": \"18:00\"\n        },\n        \"friday\": {\n            \"opening_time\": \"10:00\",\n            \"closing_time\": \"18:00\"\n        },\n        \"saturday\": {\n            \"opening_time\": \"10:00\",\n            \"closing_time\": \"18:00\"\n        },\n        \"sunday\": {\n            \"opening_time\": \"10:00\",\n            \"closing_time\": \"18:00\"\n        }\n    },\n    \"branch_routing\": {\n        \"scheme\": \"OBP\",\n        \"address\": \"123abc\"\n    },\n    \"is_accessible\": \"true\",\n    \"accessibleFeatures\": \"wheelchair, atm usuable by the visually impaired\",\n    \"branch_type\": \"Full service store\",\n    \"more_info\": \"short walk to the lake from here\",\n    \"phone_number\": \"+381631954907\"\n}"
+            },
+            "products": {
+                "title": "Root Type for products",
+                "description": "    ",
+                "type": "object",
+                "properties": {
+                    "bank_id": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "parent_product_code": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "family": {
+                        "type": "string"
+                    },
+                    "super_family": {
+                        "type": "string"
+                    },
+                    "more_info_url": {
+                        "type": "string"
+                    },
+                    "details": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "license": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "product_attributes": {
+                        "type": "array",
+                        "items": {
+
+                        }
+                    }
+                },
+                "example": "{\n    \"bank_id\": \"gh.29.uk\",\n    \"code\": \"product_code\",\n    \"parent_product_code\": \"parent\",\n    \"name\": \"product name\",\n    \"category\": \"category\",\n    \"family\": \"family\",\n    \"super_family\": \"super family\",\n    \"more_info_url\": \"www.example.com/prod1/more-info.html\",\n    \"details\": \"Details\",\n    \"description\": \"Description\",\n    \"meta\": {\n        \"license\": {\n            \"id\": \"5\",\n            \"name\": \"TESOBE\"\n        }\n    },\n    \"product_attributes\": [\n        {\n            \"product_code\": \"saving1\",\n            \"product_attribute_id\": \"613c83ea-80f9-4560-8404-b9cd4ec42a7f\",\n            \"name\": \"OVERDRAFT_START_DATE\",\n            \"type\": \"DATE_WITH_DAY\",\n            \"value\": \"2012-04-23\"\n        }\n    ]\n}"
+            },
+            "payment": {
+                "title": "Root Type for payment",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "account": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "example": {
+                    "account": "1234",
+                    "value": 13.21
+                }
+            }
+        }
+    }
+}
